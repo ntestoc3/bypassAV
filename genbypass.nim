@@ -1,4 +1,3 @@
-# nim c -d:release genbypass.nim
 # 生成bypass
 
 import base64
