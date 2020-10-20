@@ -37,7 +37,7 @@ let
                else:
                  echo "Enter shell code hex:"
                  readLine(stdin)
-  org_code = input_code.strip()
+  org_code = input_code.strip().unescape(prefix="", suffix="")
 
   replace_count = rand(3 .. len(used_enc_chars))
   to_chars = shuffleCount(used_enc_chars, replace_count)

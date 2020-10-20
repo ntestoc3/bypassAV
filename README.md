@@ -1,6 +1,6 @@
 
 # 使用方法
-　　安装nim与gcc环境
+   安装nim与gcc环境
 
    安装依赖
    nimble install argparse nigui -y
