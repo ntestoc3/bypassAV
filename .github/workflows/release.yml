@@ -6,10 +6,10 @@ on:
       - 'v*.*.*'
 
 env:
-  APP_NAME: 'APPNAME'
+  APP_NAME: 'bypassAV'
   NIM_VERSION: 'stable'
-  MAINTAINER: 'MAINTAINER'
-  RELEASE_FILES: APPNAME LICENSE README.*
+  MAINTAINER: 'ntestoc3'
+  RELEASE_FILES: genbypass* README.*
 
 jobs:
   build-artifact:
