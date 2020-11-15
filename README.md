@@ -1,7 +1,9 @@
 
-# 使用方法
-   安装nim与gcc环境
-
+# 安装方法
+   安装nim与gcc环境,如果是linux或mac环境需要安装mingw编译器进行交叉编译生成windows exe。
+   
+   下载对应平台的程序压缩包，或者使用下面的方法手动编译。
+   
 ## 生成可执行文件
 ```shell
    nimble install
@@ -13,7 +15,7 @@
 
    linux下使用mingw交叉编译，先安装mingw编译器,然后指定mingw进行编译:
 ```shell
-   nimble build -d:release -d:mingw --passC:-D_FORTIFY_SOURCE=0
+   nimble build -d:release -d:mingw 
 ```
    注意nigui交叉编译时会出现链接路径错误，windows路径无法在linux下使用,需要修改
    ~/.nimble/pkgs/nigui-0.2.4/nigui/private/windows/platform_impl.nim文件,
@@ -25,7 +27,10 @@ else:
   {.link: (currentSourcePath().parentDir() / "manifest_x86.res").replace("\\", "/") .}
 ```
 
-## 调用命令行
+# 使用方法
+   shellcode的编码为\x0d\x0a转义的字符串格式。
+
+## 使用命令行接口
    可以从剪贴板，或从文件输入shellcode,生成bypass.exe可执行文件，
 
    命令行启动:
