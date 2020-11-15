@@ -15,7 +15,7 @@
 
    linux下使用mingw交叉编译，先安装mingw编译器,然后指定mingw进行编译:
 ```shell
-   nimble build -d:release -d:mingw 
+   nimble build -Y -d:release -d:mingw 
 ```
    注意nigui交叉编译时会出现链接路径错误，windows路径无法在linux下使用,需要修改
    ~/.nimble/pkgs/nigui-0.2.4/nigui/private/windows/platform_impl.nim文件,
@@ -31,7 +31,7 @@ else:
    shellcode的编码为\x0d\x0a转义的字符串格式。
 
 ## 使用命令行接口
-   可以从剪贴板，或从文件输入shellcode,生成bypass.exe可执行文件，
+   可以从剪贴板，或从文件输入shellcode,或者stdin获取shellcode,生成bypass.exe可执行文件，
 
    命令行启动:
 ```shell
@@ -43,9 +43,10 @@ Usage:
   genbypass [options] 
 
 Options:
-  -f, --file=FILE            input shell code file, hex string format
-  -c, --clipboard            get shell code from clipboard
-  -g, --google               if host can connect google, then quit.
+  -f, --file=FILE            read shell code from file
+  -c, --clipboard            read shell code from clipboard
+  -i, --from_stdin           read shell code from stdin
+  -g, --google               check google, if host can connect google, then quit.
   -s, --sleep=SLEEP          sleep x seconds then start shellcode. (default: 180)
   -h, --help                 Show this help
 ```

@@ -144,10 +144,10 @@ if isMainModule:
   var
     p = newParser("genbypass"):
       help("generate bypass code")
-      option("-f", "--file", help="input shell code file, hex string format")
-      flag("-c", "--clipboard", help="get shell code from clipboard")
-      flag("-g", "--google", help="if host can connect google, then quit.")
-      flag("-i", "--from_stdin", help="get shell code from stdin")
+      option("-f", "--file", help="read shell code from file")
+      flag("-c", "--clipboard", help="read shell code from clipboard")
+      flag("-i", "--from_stdin", help="read shell code from stdin")
+      flag("-g", "--google", help="check google, if host can connect google, then quit.")
       option("-s", "--sleep", help="sleep x seconds then start shellcode.", default="180")
     opts = p.parse(commandLineParams())
     input_code = if opts.clipboard:
