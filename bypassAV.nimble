@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.3"
+version       = "0.1.4"
 author        = "ntestoc3"
 description   = "bypass AV"
 license       = "MIT"

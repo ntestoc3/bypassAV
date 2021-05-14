@@ -148,22 +148,28 @@ if isMainModule:
       flag("-c", "--clipboard", help="read shell code from clipboard")
       flag("-i", "--from_stdin", help="read shell code from stdin")
       flag("-g", "--google", help="check google, if host can connect google, then quit.")
-      option("-s", "--sleep", help="sleep x seconds then start shellcode.", default="180")
-    opts = p.parse(commandLineParams())
-    input_code = if opts.clipboard:
+      option("-s", "--sleep", help="sleep x seconds then start shellcode.", default=some("180"))
+  try:
+    var
+      opts = p.parse(commandLineParams())
+      input_code = if opts.clipboard:
                    app.clipboardText()
                  elif opts.file != "":
                    readFile(opts.file)
-                 elif opts.help:
-                   quit()
                  elif opts.from_stdin:
                    echo "Enter shell code hex:"
                    readLine(stdin)
                  else:
                    show_gui()
                    quit()
-
-  discard gen_shell_exe(input_code,
+    discard gen_shell_exe(input_code,
                         use_google = opts.google,
                         sleep = parseInt(opts.sleep))
+  except ShortCircuit as e:
+   if e.flag == "argparse_help":
+     echo p.help
+     quit(1)
+  except UsageError:
+   stderr.writeLine getCurrentExceptionMsg()
+   quit(1)
 
